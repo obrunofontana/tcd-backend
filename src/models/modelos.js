@@ -1,37 +1,42 @@
 module.exports = (sequelize, DataType) => {
 
+    //OBS: Precisa mudar o id PARA AUTO INCREMNTO PQ TA DANDO PAU dessa forma, lembrar de mudar nos outros tbm 
+
     const Modelos = sequelize.define('Modelos', {
         id: {
             type: DataType.STRING(16),
             primaryKey: true,
         },
         key: {
-            type: DataType.STRING(16),
+            type: DataType.STRING(20),
             allowNull: false
         },
         name: {
-            type: DataType.STRING(16),
+            type: DataType.STRING(60),
             allowNull: false
         },
         fipeCodigo: {
             type: DataType.STRING(16),
-            allowNull: false
+
         },
         veiculo: {
-            type: DataType.STRING(16),
-            allowNull: false
+            type: DataType.STRING(60),
+           
+
         },
         fipeMarca: {
-            type: DataType.STRING(16),
-            allowNull: false
+            type: DataType.STRING(30),
+
         },
         marcaId: {
             type: DataType.INTEGER,
-           
+            primaryKey: true,
+
         },
         veiculoId: {
             type: DataType.INTEGER,
-           
+            primaryKey: true,
+
         }
     });
 
