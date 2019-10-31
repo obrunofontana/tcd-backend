@@ -10,7 +10,7 @@ module.exports = (sequelize, DataType) => {
             allowNull: false
         },
         name: {
-            type: DataType.STRING(16),
+            type: DataType.STRING(30),
             allowNull: false
         }
     });
