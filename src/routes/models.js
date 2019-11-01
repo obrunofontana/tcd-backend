@@ -1,12 +1,12 @@
 module.exports = (app) => {
 
-    const Municipios = app.datasource.models.Municipios;
+    const Models = app.datasource.models.Models;
 
-    app.route('/municipios')
+    app.route('/models')
         .get((req, res) => {
-            Municipios.findAll()
+            Models.findAll()
                 .then((result) => {
-                    res.status(200).json({ municipios: result });
+                    res.status(200).json({ models: result });
                 })
                 .catch((error) => {
                     res.status(500).json(error);
@@ -14,7 +14,7 @@ module.exports = (app) => {
         })
         .post((req, res) => {
             console.log(req.body);
-            Municipios.create(req.body)
+            Models.create(req.body)
                 .then((result) => {
                     res.status(200).json(result);
                 })
@@ -23,7 +23,7 @@ module.exports = (app) => {
                 });
         });
 
-    app.route('/estados/:id')
+    app.route('/models/:id')
         .all((req, res, next) => {
 
             switch (req.method) {
@@ -39,7 +39,7 @@ module.exports = (app) => {
             next();
         })
         .get((req, res) => {
-            Municipios.findOne({ where: req.params })
+            Models.findOne({ where: req.params })
                 .then(result => {
                     if (result) {
                         res.json({ result });
@@ -52,7 +52,7 @@ module.exports = (app) => {
                 });
         })
         .delete((req, res) => {
-            Municipios.destroy({ where: req.params })
+            Models.destroy({ where: req.params })
                 .then(result => {
                     if (result) {
                         res.json(result);
@@ -67,10 +67,26 @@ module.exports = (app) => {
         .patch((req, res) => {
             console.log(req.body);
 
-            Municipios.update(req.body, { where: req.params })
+            Models.update(req.body, { where: req.params })
                 .then(result => {
                     if (result) {
                         res.json(result);
+                    } else {
+                        res.status(404).json('Not found');
+                    }
+                })
+                .catch(error => {
+                    res.status(500).json(error);
+                });
+        });
+
+    /*** Rota custom  */
+    app.route('/models/:marcaId/:veiculoId')
+        .get((req, res) => {
+            Models.findAll({ where: req.params })
+                .then(result => {
+                    if (result) {
+                        res.json({ result });
                     } else {
                         res.status(404).json('Not found');
                     }

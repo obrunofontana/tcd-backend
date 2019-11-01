@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataType) => {
 
-    const Veiculos = sequelize.define('Veiculos', {
+    const Brands = sequelize.define('Brands', {
         id: {
             type: DataType.INTEGER,
             primaryKey: true,
@@ -17,20 +17,11 @@ module.exports = (sequelize, DataType) => {
             type: DataType.STRING(16),
             allowNull: false
         },
-        marca: {
+        order: {
             type: DataType.INTEGER,
             allowNull: false
         }
     });
 
-    return Veiculos;
+    return Brands;
 };
-/*
-{
-    "key": "palio-4826",
-        "name": "Palio 1.0 Celebr. ECONOMY F.Flex 8V 4p",
-            "id": "4826",
-                "fipe_name": "Palio 1.0 Celebr. ECONOMY F.Flex 8V 4p"
-}*/
-
-

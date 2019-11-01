@@ -1,12 +1,12 @@
 module.exports = (app) => {
 
-    const Estados = app.datasource.models.Estados;
+    const Estates = app.datasource.models.Estates;
 
-    app.route('/estados')
+    app.route('/states')
         .get((req, res) => {
-            Estados.findAll()
+            Estates.findAll()
                 .then((result) => {
-                    res.status(200).json({ estados: result });
+                    res.status(200).json({ states: result });
                 })
                 .catch((error) => {
                     res.status(500).json(error);
@@ -14,7 +14,7 @@ module.exports = (app) => {
         })
         .post((req, res) => {
             console.log(req.body);
-            Estados.create(req.body)
+            Estates.create(req.body)
                 .then((result) => {
                     res.status(200).json(result);
                 })
@@ -23,7 +23,7 @@ module.exports = (app) => {
                 });
         });
 
-    app.route('/estados/:id')
+    app.route('/states/:id')
         .all((req, res, next) => {
 
             switch (req.method) {
@@ -39,7 +39,7 @@ module.exports = (app) => {
             next();
         })
         .get((req, res) => {
-            Estados.findOne({ where: req.params })
+            Estates.findOne({ where: req.params })
                 .then(result => {
                     if (result) {
                         res.json({ result });
@@ -52,7 +52,7 @@ module.exports = (app) => {
                 });
         })
         .delete((req, res) => {
-            Estados.destroy({ where: req.params })
+            Estates.destroy({ where: req.params })
                 .then(result => {
                     if (result) {
                         res.json(result);
@@ -67,7 +67,7 @@ module.exports = (app) => {
         .patch((req, res) => {
             console.log(req.body);
 
-            Estados.update(req.body, { where: req.params })
+            Estates.update(req.body, { where: req.params })
                 .then(result => {
                     if (result) {
                         res.json(result);

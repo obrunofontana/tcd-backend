@@ -2,7 +2,7 @@ module.exports = (sequelize, DataType) => {
 
     //OBS: Precisa mudar o id PARA AUTO INCREMNTO PQ TA DANDO PAU dessa forma, lembrar de mudar nos outros tbm 
 
-    const Modelos = sequelize.define('Modelos', {
+    const Models = sequelize.define('Models', {
         id: {
             type: DataType.STRING(16),
             primaryKey: true,
@@ -40,7 +40,7 @@ module.exports = (sequelize, DataType) => {
         }
     });
 
-    return Modelos;
+    return Models;
 };
 
 

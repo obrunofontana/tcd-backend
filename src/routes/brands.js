@@ -1,12 +1,12 @@
 module.exports = (app) => {
 
-    const Marcas = app.datasource.models.Marcas;
+    const Brands = app.datasource.models.Brands;
 
-    app.route('/marcas')
+    app.route('/brands')
         .get((req, res) => {
-            Marcas.findAll()
+            Brands.findAll()
                 .then((result) => {
-                    res.status(200).json({ marcas: result });
+                    res.status(200).json({ brands: result });
                 })
                 .catch((error) => {
                     res.status(500).json(error);
@@ -14,7 +14,7 @@ module.exports = (app) => {
         })
         .post((req, res) => {
             console.log(req.body);
-            Marcas.create(req.body)
+            Brands.create(req.body)
                 .then((result) => {
                     res.status(200).json(result);
                 })
@@ -22,9 +22,9 @@ module.exports = (app) => {
                     console.log(req.body);
                     res.status(500).json(req.body);
                 });
-        }); 
-         
-    app.route('/marcas/:id')
+        });
+
+    app.route('/brands/:id')
         .all((req, res, next) => {
 
             switch (req.method) {
@@ -40,7 +40,7 @@ module.exports = (app) => {
             next();
         })
         .get((req, res) => {
-            Marcas.findOne({ where: req.params })
+            Brands.findOne({ where: req.params })
                 .then(result => {
                     if (result) {
                         res.json({ result });
@@ -53,7 +53,7 @@ module.exports = (app) => {
                 });
         })
         .delete((req, res) => {
-            Marcas.destroy({ where: req.params })
+            Brands.destroy({ where: req.params })
                 .then(result => {
                     if (result) {
                         res.json(result);
@@ -68,7 +68,7 @@ module.exports = (app) => {
         .patch((req, res) => {
             console.log(req.body);
 
-            Marcas.update(req.body, { where: req.params })
+            Brands.update(req.body, { where: req.params })
                 .then(result => {
                     if (result) {
                         res.json(result);

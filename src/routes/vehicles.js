@@ -1,12 +1,12 @@
 module.exports = (app) => {
 
-    const Veiculos = app.datasource.models.Veiculos;
+    const Vehicles = app.datasource.models.Vehicles;
 
-    app.route('/veiculos')
+    app.route('/vehicles')
         .get((req, res) => {
-            Veiculos.findAll()
+            Vehicles.findAll()
                 .then((result) => {
-                    res.status(200).json({ veiculos: result });
+                    res.status(200).json({ vehicles: result });
                 })
                 .catch((error) => {
                     res.status(500).json(error);
@@ -14,7 +14,7 @@ module.exports = (app) => {
         })
         .post((req, res) => {
             console.log(req.body);
-            Veiculos.create(req.body)
+            Vehicles.create(req.body)
                 .then((result) => {
                     res.status(200).json(result);
                 })
@@ -23,7 +23,7 @@ module.exports = (app) => {
                 });
         });
 
-    app.route('/veiculos/:id')
+    app.route('/vehicles/:id')
         .all((req, res, next) => {
 
             switch (req.method) {
@@ -39,7 +39,7 @@ module.exports = (app) => {
             next();
         })
         .get((req, res) => {
-            Veiculos.findOne({ where: req.params })
+            Vehicles.findOne({ where: req.params })
                 .then(result => {
                     if (result) {
                         res.json({ result });
@@ -52,7 +52,7 @@ module.exports = (app) => {
                 });
         })
         .delete((req, res) => {
-            Veiculos.destroy({ where: req.params })
+            Vehicles.destroy({ where: req.params })
                 .then(result => {
                     if (result) {
                         res.json(result);
@@ -67,7 +67,7 @@ module.exports = (app) => {
         .patch((req, res) => {
             console.log(req.body);
 
-            Veiculos.update(req.body, { where: req.params })
+            Vehicles.update(req.body, { where: req.params })
                 .then(result => {
                     if (result) {
                         res.json(result);
@@ -79,11 +79,11 @@ module.exports = (app) => {
                     res.status(500).json(error);
                 });
         });
-        
+
     /*** Rota custom  */
-    app.route('/veiculos/marcas/:marca')
+    app.route('/vehicles/marcas/:marca')
         .get((req, res) => {
-            Veiculos.findAll({ where: req.params })
+            Vehicles.findAll({ where: req.params })
                 .then(result => {
                     if (result) {
                         res.json({ result });
@@ -95,32 +95,4 @@ module.exports = (app) => {
                     res.status(500).json(error);
                 });
         });
-    /* .delete((req, res) => {
-         Veiculos.destroy({ where: req.params })
-             .then(result => {
-                 if (result) {
-                     res.json(result);
-                 } else {
-                     res.status(404).json('Not found');
-                 }
-             })
-             .catch(error => {
-                 res.status(500).json(error);
-             });
-     })
-     .patch((req, res) => {
-         console.log(req.body);
-
-         Veiculos.update(req.body, { where: req.params })
-             .then(result => {
-                 if (result) {
-                     res.json(result);
-                 } else {
-                     res.status(404).json('Not found');
-                 }
-             })
-             .catch(error => {
-                 res.status(500).json(error);
-             });
-     });*/
 };

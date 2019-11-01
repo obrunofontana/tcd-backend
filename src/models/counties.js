@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataType) => {
 
-    const Municipios = sequelize.define('Municipios', {
+    const Counties = sequelize.define('Counties', {
         id: {
             type: DataType.INTEGER,
             primaryKey: true,
@@ -9,14 +9,14 @@ module.exports = (sequelize, DataType) => {
             type: DataType.STRING(16),
             allowNull: false
         },
-        estado: {
+        state: {
             type: DataType.STRING(2),
             allowNull: false
             
         }
     });
 
-    return Municipios;
+    return Counties;
 };
 
 /*
