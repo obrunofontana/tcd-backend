@@ -24,20 +24,6 @@ module.exports = (app) => {
         });
 
     app.route('/counties/:id')
-        .all((req, res, next) => {
-
-            switch (req.method) {
-                case 'PATCH':
-                    req.body.status = 'U';
-                    break;
-
-                case 'DELETE':
-                    req.body.status = 'D';
-                    break;
-            }
-
-            next();
-        })
         .get((req, res) => {
             Counties.findOne({ where: req.params })
                 .then(result => {
@@ -51,11 +37,41 @@ module.exports = (app) => {
                     res.status(500).json(error);
                 });
         })
-        .delete((req, res) => {
-            Counties.destroy({ where: req.params })
+    /*     .delete((req, res) => {
+             Counties.destroy({ where: req.params })
+                 .then(result => {
+                     if (result) {
+                         res.json(result);
+                     } else {
+                         res.status(404).json('Not found');
+                     }
+                 })
+                 .catch(error => {
+                     res.status(500).json(error);
+                 });
+         })
+         .patch((req, res) => {
+             console.log(req.body);
+ 
+             Counties.update(req.body, { where: req.params })
+                 .then(result => {
+                     if (result) {
+                         res.json(result);
+                     } else {
+                         res.status(404).json('Not found');
+                     }
+                 })
+                 .catch(error => {
+                     res.status(500).json(error);
+                 });
+         });*/
+
+    app.route('/counties/state/:state')
+        .get((req, res) => {
+            Counties.findAll({ where: req.params })
                 .then(result => {
                     if (result) {
-                        res.json(result);
+                        res.json({ result });
                     } else {
                         res.status(404).json('Not found');
                     }
@@ -64,19 +80,5 @@ module.exports = (app) => {
                     res.status(500).json(error);
                 });
         })
-        .patch((req, res) => {
-            console.log(req.body);
 
-            Counties.update(req.body, { where: req.params })
-                .then(result => {
-                    if (result) {
-                        res.json(result);
-                    } else {
-                        res.status(404).json('Not found');
-                    }
-                })
-                .catch(error => {
-                    res.status(500).json(error);
-                });
-        });
 };

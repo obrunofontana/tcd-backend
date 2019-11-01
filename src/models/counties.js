@@ -4,16 +4,21 @@ module.exports = (sequelize, DataType) => {
         id: {
             type: DataType.INTEGER,
             primaryKey: true,
-        },        
+        },
         name: {
             type: DataType.STRING(16),
             allowNull: false
         },
         state: {
+            type: DataType.INTEGER,
+            allowNull: false
+
+        },
+        uf: {
             type: DataType.STRING(2),
             allowNull: false
-            
-        }
+
+        },
     });
 
     return Counties;

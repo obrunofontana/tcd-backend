@@ -81,7 +81,7 @@ module.exports = (app) => {
         });
 
     /*** Rota custom  */
-    app.route('/vehicles/marcas/:marca')
+    app.route('/vehicles/brands/:brand')
         .get((req, res) => {
             Vehicles.findAll({ where: req.params })
                 .then(result => {
