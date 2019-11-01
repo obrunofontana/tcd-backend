@@ -4,7 +4,7 @@ module.exports = (app) => {
 
     app.route('/states')
         .get((req, res) => {
-            Estates.findAll()
+            States.findAll()
                 .then((result) => {
                     res.status(200).json({ states: result });
                 })
