@@ -1,6 +1,6 @@
 module.exports = (app) => {
 
-    const Estates = app.datasource.models.Estates;
+    const States = app.datasource.models.States;
 
     app.route('/states')
         .get((req, res) => {
@@ -14,7 +14,7 @@ module.exports = (app) => {
         })
         .post((req, res) => {
             console.log(req.body);
-            Estates.create(req.body)
+            States.create(req.body)
                 .then((result) => {
                     res.status(200).json(result);
                 })
@@ -39,7 +39,7 @@ module.exports = (app) => {
             next();
         })
         .get((req, res) => {
-            Estates.findOne({ where: req.params })
+            States.findOne({ where: req.params })
                 .then(result => {
                     if (result) {
                         res.json({ result });
@@ -52,7 +52,7 @@ module.exports = (app) => {
                 });
         })
         .delete((req, res) => {
-            Estates.destroy({ where: req.params })
+            States.destroy({ where: req.params })
                 .then(result => {
                     if (result) {
                         res.json(result);
@@ -67,7 +67,7 @@ module.exports = (app) => {
         .patch((req, res) => {
             console.log(req.body);
 
-            Estates.update(req.body, { where: req.params })
+            States.update(req.body, { where: req.params })
                 .then(result => {
                     if (result) {
                         res.json(result);

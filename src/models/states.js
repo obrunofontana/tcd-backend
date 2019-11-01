@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataType) => {
 
-    const Estates = sequelize.define('Estates', {
+    const States = sequelize.define('States', {
         id: {
             type: DataType.INTEGER,
             primaryKey: true,
@@ -15,7 +15,7 @@ module.exports = (sequelize, DataType) => {
         }
     });
 
-    return Estates;
+    return States;
 };
 
 
